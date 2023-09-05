@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../Hooks/useAuthContext";
+import LogoutButton from "./LogoutButton";
 const NavBar = () => {
+  const userAuth=useAuthContext()
+  // console.log(userAuth)
   return (
     <>
       <header>
@@ -9,7 +13,7 @@ const NavBar = () => {
           <p>Izaan</p>
         </div>
           <ul>
-            <li>
+          <li>
               <Link to="/">Home</Link>
             </li>
             <li>
@@ -21,6 +25,9 @@ const NavBar = () => {
             <li>
               <Link to="/edit">Edit</Link>
             </li>
+           <li>
+           <LogoutButton/>
+           </li>
           </ul>
         </nav>
       </header>

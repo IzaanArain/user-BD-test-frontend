@@ -2,8 +2,14 @@ import React from 'react'
 import {FaUser,FaPhone} from "react-icons/fa"
 import {TfiEmail}from 'react-icons/tfi'
 import {RiLockPasswordFill as PasswordIcon} from 'react-icons/ri'
-import { useState } from 'react'
+import { useState } from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useAuthContext } from '../Hooks/useAuthContext';
+
 const EditUser = () => {
+  const userAuth=useAuthContext();
+  const token=userAuth.userAuth;  
   const [newUser,setNewUser]=useState({
     name:"",
     email:"",
@@ -11,18 +17,58 @@ const EditUser = () => {
     phone:"",
   });
 
+  useEffect(()=>{
+    const getUser=async()=>{
+      try{
+        const res=await axios.get("http://localhost:5000/api/v1/users/",
+        {
+          headers:{
+            "authorization" : `Bearer ${token}`,
+          }
+        })
+        const data=await res.data
+        const userData=data.user
+        setNewUser({
+          name:userData.name,
+          email:userData.email,
+          phone:userData.phone
+        });
+      }catch(err){
+        console.error("Error",err.message)
+      }
+    };
+    getUser()
+  },[])
+
   const OnChangeHandler=(e)=>{
     const {value,name}=e.target
     setNewUser((prev)=>({...prev,[name]:value}));
   }
-  console.log(newUser);
+  // console.log(newUser);
+
+  const edit_api=async()=>{
+    const res=await axios.put("http://localhost:5000/api/v1/users/update/",
+    {...newUser},
+    { headers:{
+      "authorization" : `Bearer ${token}`,
+    }})
+    const data=await res.data
+    const userData=data.user;
+    console.log(userData)
+    return userData
+  }
+  const editOnSubmit=(e)=>{
+    e.preventDefault()
+    edit_api(newUser)
+  }
   return (
     <>
     <div className="submit_page">
       <div className="submit_form">
-        <form>
+        <form onSubmit={editOnSubmit}>
           <div className="form_heading">
           <p>Edit User</p>
+          <p>must enter password for editing profile</p>
           </div>
           <div className="form-group">
             <label htmlFor="name"><FaUser/></label>
@@ -52,7 +98,7 @@ const EditUser = () => {
             placeholder='user password'
             value={newUser.password}
             onChange={OnChangeHandler}
-            required />
+            required/>
           </div>
           <div className="form-group">
             <label htmlFor="phone"><FaPhone/></label>
@@ -66,7 +112,7 @@ const EditUser = () => {
             required />
           </div>
 
-          <input type="button" id='submit_btn' value="SUBMIT"/>
+          <input type="submit" id='submit_btn' value="SUBMIT"/>
           <input type="button" id='delete_btn' value="Delete"/>
         </form>
       </div>

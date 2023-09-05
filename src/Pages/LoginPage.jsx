@@ -28,7 +28,7 @@ const LoginPage = () => {
       );
       const userData=await res.data;
       localStorage.setItem("user",JSON.stringify(userData.user));
-      console.log(userData)
+      // console.log(userData)
     } catch (err) {
       console.error("Error: ", err.message);
     }

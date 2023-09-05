@@ -17,6 +17,7 @@ const ContextProvider = ({children}) => {
             }
           })
           const data=await res.data;
+          // console.log(data)
           // console.log("fetching data...",data)
          setUsers(data);
       }catch(err){

@@ -5,7 +5,11 @@ import NotFound from "./Pages/NotFound";
 import Home from "./Pages/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
+import { useAuthContext } from "./Hooks/useAuthContext";
+
 function App() {
+  const userAuth=useAuthContext()
+  const user=userAuth.userAuth
   return (
     <>
       <BrowserRouter>
