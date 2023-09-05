@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../Hooks/useAuthContext";
 import LogoutButton from "./LogoutButton";
 const NavBar = () => {
-  const userAuth=useAuthContext()
-  // console.log(userAuth)
+  const user=useAuthContext()
+  console.log(user)
   return (
     <>
       <header>
@@ -13,18 +13,22 @@ const NavBar = () => {
           <p>Izaan</p>
         </div>
           <ul>
-          <li>
+          {
+            user.userAuth ? (<li>
               <Link to="/">Home</Link>
-            </li>
+            </li>) : null
+          }
             <li>
               <Link to="/login">Login</Link>
             </li>
             <li>
               <Link to="/register">Register</Link>
             </li>
-            <li>
+            {
+            !user.userAuth ? null : (<li>
               <Link to="/edit">Edit</Link>
-            </li>
+            </li>)
+          }
            <li>
            <LogoutButton/>
            </li>
