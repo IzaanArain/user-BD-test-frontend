@@ -3,6 +3,9 @@ import {FaUser,FaPhone} from "react-icons/fa"
 import {TfiEmail}from 'react-icons/tfi'
 import {RiLockPasswordFill as PasswordIcon} from 'react-icons/ri'
 import { useState } from 'react'
+import { useEffect } from 'react'
+import axios from 'axios'
+
 const Register = () => {
   const [newUser,setNewUser]=useState({
     name:"",
@@ -10,6 +13,28 @@ const Register = () => {
     password:"",
     phone:"",
   });
+  // console.log(newUser)
+
+  const postUser=async(data)=>{
+    try{
+      const res=await axios.post("http://localhost:5000/api/v1/users/create",
+      {...data},
+      {
+        headers:{
+          'Content-Type':'application/json'
+        }
+      })
+      console.log(res)
+    }catch(err){
+      console.error("Error: ",err.message);
+    }
+  }
+
+  const CreateUser=(e)=>{
+    e.preventDefault()
+    console.log("click")
+    postUser(newUser)
+  }
 
   const OnChangeHandler=(e)=>{
     const {value,name}=e.target
@@ -19,7 +44,7 @@ const Register = () => {
     <>
     <div className="submit_page">
       <div className="submit_form">
-        <form>
+        <form onSubmit={CreateUser}>
           <div className="form_heading">
           <p>Register</p>
           </div>
@@ -44,7 +69,7 @@ const Register = () => {
             required />
           </div>
           <div className="form-group">
-            <label htmlFor="name"><PasswordIcon/></label>
+            <label htmlFor="password"><PasswordIcon/></label>
             <input type="password"
             name='password'
             id='password'
@@ -58,14 +83,14 @@ const Register = () => {
             <input type="tel"
             name='phone'
             id='phone'
-            value={newUser.name}
+            value={newUser.phone}
             onChange={OnChangeHandler}
             maxLength="11"
             placeholder='user phone number'
             required />
           </div>
 
-          <input type="button" id='submit_btn' value="SUBMIT"/>
+          <input type="submit" id='submit_btn' value="SUBMIT"/>
         </form>
       </div>
     </div>

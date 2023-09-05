@@ -45,7 +45,7 @@ const EditUser = () => {
             required />
           </div>
           <div className="form-group">
-            <label htmlFor="name"><PasswordIcon/></label>
+            <label htmlFor="password"><PasswordIcon/></label>
             <input type="password"
             name='password'
             id='password'
