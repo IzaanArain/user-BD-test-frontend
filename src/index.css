@@ -173,7 +173,11 @@ a{
     border-radius: 10px;
 }
 
-
+#user_logo{
+    font-size: 50px;
+    text-align: center;
+    color: white;
+}
 
 @media screen and (max-width:768px) {
     nav{

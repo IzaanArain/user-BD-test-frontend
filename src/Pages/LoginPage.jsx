@@ -1,6 +1,7 @@
 import React from "react";
 import { TfiEmail } from "react-icons/tfi";
 import { RiLockPasswordFill as PasswordIcon } from "react-icons/ri";
+import {SlLogin as LoginIcon} from "react-icons/sl"
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate  } from "react-router-dom";
@@ -51,6 +52,9 @@ const LoginPage = () => {
       <div className="submit_page">
         <div className="submit_form">
           <form onSubmit={loginOnSubmit}>
+          <div id="user_logo">
+             <LoginIcon/>
+            </div>
             <div className="form_heading">
               <p>Login</p>
             </div>

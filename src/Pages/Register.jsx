@@ -2,6 +2,7 @@ import React from 'react'
 import {FaUser,FaPhone} from "react-icons/fa"
 import {TfiEmail}from 'react-icons/tfi'
 import {RiLockPasswordFill as PasswordIcon} from 'react-icons/ri'
+import {FaRegUserCircle as UserLogo} from "react-icons/fa"
 import { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
@@ -48,6 +49,9 @@ const Register = () => {
     <div className="submit_page">
       <div className="submit_form">
         <form onSubmit={CreateUser}>
+        <div id="user_logo">
+          <UserLogo/>
+          </div>
           <div className="form_heading">
           <p>Register</p>
           </div>
