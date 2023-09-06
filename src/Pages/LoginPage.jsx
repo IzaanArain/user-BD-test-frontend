@@ -3,12 +3,17 @@ import { TfiEmail } from "react-icons/tfi";
 import { RiLockPasswordFill as PasswordIcon } from "react-icons/ri";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate  } from "react-router-dom";
+import { useAuthContext } from "../Hooks/useAuthContext";
 
 const LoginPage = () => {
   const [userLogin, setUserLogin] = useState({
     email: "",
     password: "",
   });
+
+  const {setUserAuth}=useAuthContext()
+  const navigate=useNavigate();
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -28,7 +33,7 @@ const LoginPage = () => {
       );
       const userData=await res.data;
       localStorage.setItem("user",JSON.stringify(userData.user));
-      // console.log(userData)
+      setUserAuth(userData.user)
     } catch (err) {
       console.error("Error: ", err.message);
     }
@@ -37,10 +42,11 @@ const LoginPage = () => {
   const loginOnSubmit = (e) => {
     e.preventDefault();
     login_api(userLogin);
-    setUserLogin({
-      email:"",
-      password:""
-    });
+    navigate("/")
+    // setUserLogin({
+    //   email:"",
+    //   password:""
+    // });
   };
   return (
     <>

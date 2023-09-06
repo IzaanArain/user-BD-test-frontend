@@ -5,10 +5,11 @@ import { userContext } from './Context';
 import { useAuthContext } from '../../Hooks/useAuthContext';
 const ContextProvider = ({children}) => {
   const [users,setUsers]=useState([]);
-  const userAuth=useAuthContext()
-  const token=userAuth.userAuth
-  // console.log(token)
+  const {userAuth}=useAuthContext()
+  const token=userAuth?.userAuth
+  // console.log("All usersContext token",token)
   useEffect(()=>{
+   if(token){
     const fetchUsers=async()=>{
       try{
           const res=await axios.get("http://localhost:5000/api/v1/users/allusers",{
@@ -25,7 +26,8 @@ const ContextProvider = ({children}) => {
       }
   };
   fetchUsers();
-  },[])
+   }
+  },[userAuth])
   // console.log(users)
   return (
     <>

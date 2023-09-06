@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../Hooks/useAuthContext";
 import LogoutButton from "./LogoutButton";
 const NavBar = () => {
-  const user=useAuthContext()
-  console.log(user)
+  const {userAuth}=useAuthContext()
+  const token=userAuth.userAuth;
+  // console.log(user)
   return (
     <>
       <header>
@@ -14,23 +15,27 @@ const NavBar = () => {
         </div>
           <ul>
           {
-            user.userAuth ? (<li>
+            token ? (<li>
               <Link to="/">Home</Link>
             </li>) : null
           }
-            <li>
+            {
+              token ?  null : <li>
               <Link to="/login">Login</Link>
             </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
+            }
+           {
+            token ?  null : <li>
+            <Link to="/register">Register</Link>
+          </li> 
+           }
             {
-            !user.userAuth ? null : (<li>
+            !token ? null : (<li>
               <Link to="/edit">Edit</Link>
             </li>)
           }
            <li>
-           <LogoutButton/>
+           {token ? <LogoutButton/>:null}
            </li>
           </ul>
         </nav>

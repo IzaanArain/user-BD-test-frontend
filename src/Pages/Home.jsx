@@ -8,19 +8,19 @@ import { useAuthContext } from '../Hooks/useAuthContext';
 const Home = () => {
 const users=useUserContext();
 // console.log(users)
-const userAuth=useAuthContext()
-// console.log(userAuth)
+const {userAuth}=useAuthContext()
+const token=userAuth.userAuth
   return (
     <>
     <div className="userList">
     {
-      users.map((user,i)=>{
+     users.map((user,i)=>{
         return(
           <Fragment key={i}>
             <UserCard user={user}/>
           </Fragment>
         )
-      })
+      }) 
     }
     </div>
     </>

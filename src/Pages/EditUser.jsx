@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { useAuthContext } from '../Hooks/useAuthContext';
 
 const EditUser = () => {
-  const userAuth=useAuthContext();
+  const {userAuth}=useAuthContext();
   const token=userAuth.userAuth;  
   const [newUser,setNewUser]=useState({
     name:"",

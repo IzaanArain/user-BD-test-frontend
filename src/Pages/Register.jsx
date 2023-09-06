@@ -5,6 +5,7 @@ import {RiLockPasswordFill as PasswordIcon} from 'react-icons/ri'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
   const [newUser,setNewUser]=useState({
@@ -14,6 +15,7 @@ const Register = () => {
     phone:"",
   });
   // console.log(newUser)
+  const navigate=useNavigate();
 
   const postUser=async(data)=>{
     try{
@@ -34,6 +36,7 @@ const Register = () => {
     e.preventDefault()
     console.log("click")
     postUser(newUser)
+    navigate("/login")
   }
 
   const OnChangeHandler=(e)=>{

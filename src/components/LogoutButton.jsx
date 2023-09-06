@@ -1,16 +1,26 @@
-import React from 'react'
-import { Navigate } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../Hooks/useAuthContext";
 const LogoutButton = () => {
-    const user=JSON.parse(localStorage.getItem("user"))
-    delete user.userAuth;
-    // console.log(user)
-  return (
-   <>
-   <button onClick={()=>{
-    localStorage.setItem("user",JSON.stringify(user))
-   }}>Logout</button>
-   </>
-  )
-}
+  const {userAuth,setUserAuth}=useAuthContext()
+  const navigate = useNavigate();
 
-export default LogoutButton
+ const Logout=()=>{
+  const user = JSON.parse(localStorage.getItem("user"));
+  delete user.userAuth;
+ localStorage.setItem("user", JSON.stringify(user));
+ const logoutState=localStorage.getItem("user")
+  setUserAuth(logoutState)
+  navigate("/login");
+ }
+
+
+
+  return (
+    <>
+      <button onClick={Logout}>Logout</button>
+    </>
+  );
+};
+
+export default LogoutButton;

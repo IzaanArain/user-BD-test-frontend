@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 
 const AuthContextProvider = ({children}) => {
+  const [userAuth,setUserAuth]=useState({});
   // const user_d={ 
   //       name: "jane",
   //       email: "jane@gmail.com",
@@ -13,11 +14,17 @@ const AuthContextProvider = ({children}) => {
   //       updatedAt: "2023-09-05T15:23:33.253Z"
   //     }
   // localStorage.setItem("user",JSON.stringify(user_d))
-  const userAuth=JSON.parse(localStorage.getItem("user"))
- 
+  const auth=JSON.parse(localStorage.getItem("user"))
+  const token=auth.userAuth;
+  console.log("AuthContext:",token)
+  useEffect(()=>{
+      if(token){
+        setUserAuth(auth)
+      }
+  },[])
   return (
     <>
-    <authContext.Provider value={userAuth}> 
+    <authContext.Provider value={{userAuth,setUserAuth}}> 
     {children}
     </authContext.Provider>
     </>

@@ -3,23 +3,24 @@ import LoginPage from "./Pages/LoginPage";
 import EditUser from "./Pages/EditUser";
 import NotFound from "./Pages/NotFound";
 import Home from "./Pages/Home";
-import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import { useAuthContext } from "./Hooks/useAuthContext";
 
 function App() {
-  const userAuth=useAuthContext()
-  const user=userAuth
-  // console.log(user)
+  const {userAuth}= useAuthContext();
+  const token = userAuth.userAuth;
+  // console.log("token: ", token);
+  // console.log("user: ", userAuth);
   return (
     <>
       <BrowserRouter>
         <NavBar />
         <Routes>
-          {!user.userAuth ? <Route path="/" element={<Home />} />: <Navigate to="/login"/>}
-          <Route path="/register" element={<Register />} />
-          {!user.userAuth ? <Route path="/" element={<Home />} />: <Route path="/login" element={<LoginPage />} />}
-          {!user.userAuth ? <Route path="/edit" element={<EditUser />} />: <Navigate to="/login"/>}
+          <Route path="/" element={token ? <Home /> : <Navigate to="/login"/>} />
+          <Route path="/register" element={token ?  <Navigate to="/"/>:  <Register />} />
+          <Route path="/login" element={token ? <Navigate to="/"/>:<LoginPage /> } />
+          <Route path="/edit" element={token ? <EditUser /> : <Navigate to="/login"/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
