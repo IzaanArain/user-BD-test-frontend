@@ -6,7 +6,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useAuthContext } from '../Hooks/useAuthContext';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import DeleteButton from '../components/DeleteButton';
 const EditUser = () => {
   const {userAuth,setUserAuth}=useAuthContext();
@@ -64,6 +64,7 @@ const EditUser = () => {
   const editOnSubmit=(e)=>{
     e.preventDefault()
     edit_api(newUser)
+    navigate("/")
   }
   return (
     <>

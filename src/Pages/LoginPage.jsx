@@ -12,6 +12,8 @@ const LoginPage = () => {
     password: "",
   });
 
+  const [isError,setIsError]=useState("");
+
   const {setUserAuth}=useAuthContext()
   const navigate=useNavigate();
 
@@ -35,14 +37,18 @@ const LoginPage = () => {
       localStorage.setItem("user",JSON.stringify(userData.user));
       setUserAuth(userData.user)
     } catch (err) {
-      console.error("Error: ", err.message);
+      // let err_message=`Status:${err.response.data.status}, ${err.response.data.message}`
+      setIsError(err.response.data.message)
+      console.error("Error: ", err.response.data.message);
     }
   };
 
   const loginOnSubmit = (e) => {
     e.preventDefault();
     login_api(userLogin);
-    navigate("/")
+    if(isError){
+      navigate("/")
+    }
     // setUserLogin({
     //   email:"",
     //   password:""
@@ -56,7 +62,6 @@ const LoginPage = () => {
             <div className="form_heading">
               <p>Login</p>
             </div>
-
             <div className="form-group">
               <label htmlFor="email">
                 <TfiEmail />
@@ -72,7 +77,7 @@ const LoginPage = () => {
                 required
               />
             </div>
-
+            {isError && (<div id="error_block"><p>{isError}</p></div>)}
             <div className="form-group">
               <label htmlFor="password">
                 <PasswordIcon />
