@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../Hooks/useAuthContext";
 import LogoutButton from "./LogoutButton";
+import {FaEnvira as LogoIcon} from "react-icons/fa"
 const NavBar = () => {
   const {userAuth}=useAuthContext()
   const token=userAuth.userAuth;
@@ -11,7 +12,7 @@ const NavBar = () => {
       <header>
         <nav>
         <div id="logo">
-          <p>Izaan</p>
+          <p><span><LogoIcon/></span>Izaan</p>
         </div>
           <ul>
           {
