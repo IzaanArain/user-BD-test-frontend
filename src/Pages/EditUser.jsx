@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { useNavigate } from 'react-router-dom';
+import DeleteButton from '../components/DeleteButton';
 const EditUser = () => {
   const {userAuth,setUserAuth}=useAuthContext();
   const token=userAuth.userAuth;  
@@ -48,16 +49,16 @@ const EditUser = () => {
   }
   // console.log(newUser);
 
-  const edit_api=async()=>{
+  const edit_api=async(data)=>{
     const res=await axios.put("http://localhost:5000/api/v1/users/update/",
-    {...newUser},
+    {...data},
     { headers:{
       "authorization" : `Bearer ${token}`,
     }})
-    const data=await res.data
-    const userData=data.user;
+    const userData=await res.data
+    const user_d=userData.user;
     // console.log(userData)
-    setUserAuth(userData)
+    setUserAuth(user_d)
     return userData
   }
   const editOnSubmit=(e)=>{
@@ -116,7 +117,7 @@ const EditUser = () => {
           </div>
 
           <input type="submit" id='submit_btn' value="SUBMIT"/>
-          <input type="button" id='delete_btn' value="Delete"/>
+          <DeleteButton/>
         </form>
       </div>
     </div>

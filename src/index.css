@@ -139,6 +139,14 @@ a{
     padding: 10px;
 }
 
+#logout_btn{
+    padding: 0px 10px;
+    font-size: 20px;
+    font-weight: bolder;
+    border-radius: 5px;
+    border: none;
+}
+
 
 @media screen and (max-width:768px) {
     nav{

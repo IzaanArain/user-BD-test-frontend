@@ -6,9 +6,9 @@ const LogoutButton = () => {
   const navigate = useNavigate();
 
  const Logout=()=>{
-  const user = JSON.parse(localStorage.getItem("user"));
-  delete user.userAuth;
- localStorage.setItem("user", JSON.stringify(user));
+  // const user = JSON.parse(localStorage.getItem("user"));
+  // delete user.userAuth;
+ localStorage.setItem("user", JSON.stringify({}));
  const logoutState=localStorage.getItem("user")
   setUserAuth(logoutState)
   navigate("/login");
@@ -18,7 +18,7 @@ const LogoutButton = () => {
 
   return (
     <>
-      <button onClick={Logout}>Logout</button>
+      <button onClick={Logout} id="logout_btn">Logout</button>
     </>
   );
 };
