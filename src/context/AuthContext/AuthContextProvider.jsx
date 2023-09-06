@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 
 const AuthContextProvider = ({children}) => {
   const [userAuth,setUserAuth]=useState({});
+  // console.log("AuthContext state:",userAuth)
   // const user_d={ 
   //       name: "jane",
   //       email: "jane@gmail.com",
@@ -15,8 +16,8 @@ const AuthContextProvider = ({children}) => {
   //     }
   // localStorage.setItem("user",JSON.stringify(user_d))
   const auth=JSON.parse(localStorage.getItem("user"))
-  const token=auth.userAuth;
-  // console.log("AuthContext:",token)
+  const token=auth?.userAuth;
+  // console.log("AuthContext token:",token)
   useEffect(()=>{
       if(token){
         setUserAuth(auth)
