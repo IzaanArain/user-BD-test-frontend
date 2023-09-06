@@ -68,6 +68,7 @@ const LoginPage = () => {
                 value={userLogin.email}
                 onChange={onChangeHandler}
                 placeholder="user email"
+                autoComplete="on"
                 required
               />
             </div>
