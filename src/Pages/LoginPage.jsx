@@ -37,7 +37,6 @@ const LoginPage = () => {
       localStorage.setItem("user",JSON.stringify(userData.user));
       setUserAuth(userData.user)
     } catch (err) {
-      // let err_message=`Status:${err.response.data.status}, ${err.response.data.message}`
       setIsError(err.response.data.message)
       console.error("Error: ", err.response.data.message);
     }
@@ -46,13 +45,6 @@ const LoginPage = () => {
   const loginOnSubmit = (e) => {
     e.preventDefault();
     login_api(userLogin);
-    if(isError){
-      navigate("/")
-    }
-    // setUserLogin({
-    //   email:"",
-    //   password:""
-    // });
   };
   return (
     <>
