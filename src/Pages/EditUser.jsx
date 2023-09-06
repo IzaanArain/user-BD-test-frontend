@@ -6,9 +6,9 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useAuthContext } from '../Hooks/useAuthContext';
-
+import { useNavigate } from 'react-router-dom';
 const EditUser = () => {
-  const {userAuth}=useAuthContext();
+  const {userAuth,setUserAuth}=useAuthContext();
   const token=userAuth.userAuth;  
   const [newUser,setNewUser]=useState({
     name:"",
@@ -16,6 +16,8 @@ const EditUser = () => {
     password:"",
     phone:"",
   });
+
+  const navigate=useNavigate()
 
   useEffect(()=>{
     const getUser=async()=>{
@@ -54,7 +56,8 @@ const EditUser = () => {
     }})
     const data=await res.data
     const userData=data.user;
-    console.log(userData)
+    // console.log(userData)
+    setUserAuth(userData)
     return userData
   }
   const editOnSubmit=(e)=>{

@@ -16,7 +16,7 @@ const AuthContextProvider = ({children}) => {
   // localStorage.setItem("user",JSON.stringify(user_d))
   const auth=JSON.parse(localStorage.getItem("user"))
   const token=auth.userAuth;
-  console.log("AuthContext:",token)
+  // console.log("AuthContext:",token)
   useEffect(()=>{
       if(token){
         setUserAuth(auth)
