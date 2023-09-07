@@ -4,7 +4,7 @@ import axios from 'axios';
 import { userContext } from './Context';
 import { useAuthContext } from '../../Hooks/useAuthContext';
 const ContextProvider = ({children}) => {
-  const [users,setUsers]=useState([]);
+  const [users,setUsers]=useState(null);
   const {userAuth}=useAuthContext()
   const token=userAuth?.userAuth
   // console.log("All usersContext token",token)

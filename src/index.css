@@ -179,6 +179,11 @@ a{
     color: white;
 }
 
+#loading{
+    text-align: center;
+    font-size: 30px;
+}
+
 @media screen and (max-width:768px) {
     nav{
         flex-direction: column;
